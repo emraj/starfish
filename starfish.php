@@ -4,7 +4,7 @@
  * Plugin Name: Starfish
  * Plugin URI: www.umidigital.co.uk
  * Description: A performance index plugin for websites on the Umi Reef.
- * Version: 0.1.0
+ * Version: 0.2.0
  * Author: S. M. Sirajo
  * Author URI: www.umidigital.co.uk
  * License: GPL2

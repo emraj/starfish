@@ -10,27 +10,36 @@ class data_loader
 	public static $percentageSum;
 	#public $website;
 
-    public function conn_GA($set_profile_id)
+    public function conn_GA($set_account, $set_password, $set_profile_id)
     {
     	require 'gapi.class.php';
-    	// Google Analytics credentials.
-    	define('ga_account'     ,'analyticsumi@gmail.com');
-        define('ga_password'    ,'124adigital');
-        $profileid = $set_profile_id;
-        echo ("<p>$profileid</p>");
-        #$website = 65103190;
-        define('ga_profile_id'  ,$profileid);
-        
-        $ga = new gapi(ga_account,ga_password);
+      
+      #$account = 'analyticsumi@gmail.com';
+      #$password = '124adigital';
 
-        // We are using the 'source' dimension and the 'visits' metrics
-        $dimensions = array('source');
-        $metrics    = array('visits', 'bounceRate');
+      $account = $set_account;
+      $password = $set_password;
+      $profile_id = $set_profile_id;
 
-       /* We will sort the result by desending order of visits, 
-       and hence the '-' sign before the 'visits' string */
-       $ga->requestReportData(ga_profile_id, $dimensions, $metrics, '-visits');
-       $gaResults = $ga->getResults();
+      // Google Analytics credentials.
+    	define('ga_account'    , $account);
+      define('ga_password'   , $password);
+      define('ga_profile_id' , $profile_id);
+
+      echo ("<p>$account</p>");
+      echo ("<p>$password</p>");
+      echo ("<p>$profile_id</p>");
+      
+      $ga = new gapi(ga_account,ga_password);
+
+      // We are using the 'source' dimension and the 'visits' metrics
+      $dimensions = array('source');
+      $metrics    = array('visits', 'bounceRate');
+
+      /* We will sort the result by desending order of visits, 
+      and hence the '-' sign before the 'visits' string */
+      $ga->requestReportData(ga_profile_id, $dimensions, $metrics, '-visits');
+      $gaResults = $ga->getResults();
        $i=1;
        foreach($gaResults as $result)
        {

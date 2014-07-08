@@ -3,7 +3,7 @@
 * blog_ids.class.php gets data from websites.csv file.
 */
 
-require('domain_age.class.php');
+#require('domain_age.class.php');
 
 class blog_ids
 {
@@ -77,10 +77,10 @@ class blog_ids
 		global $domain;
 		global $position;
 		$mydomain = $domain[$position];
-		echo ("The domain $mydomain is <br>");
-		$w = new domain_age();
-		echo $w->age($mydomain);
-		return $w->age($mydomain);
+		#echo ("The domain $mydomain is <br>");
+		#$w = new domain_age();
+		#echo $w->age($mydomain);
+		#return $w->age($mydomain);
 	}
 
 	public function get_myprofile()
