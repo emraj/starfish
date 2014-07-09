@@ -14,8 +14,6 @@ class data_loader
     {
     	require 'gapi.class.php';
       
-      #$account = 'analyticsumi@gmail.com';
-      #$password = '124adigital';
 
       $account = $set_account;
       $password = $set_password;
@@ -26,43 +24,55 @@ class data_loader
       define('ga_password'   , $password);
       define('ga_profile_id' , $profile_id);
 
+      // Confirm login details in use.
       echo ("<p>$account</p>");
       echo ("<p>$password</p>");
       echo ("<p>$profile_id</p>");
       
       $ga = new gapi(ga_account,ga_password);
 
-      // We are using the 'source' dimension and the 'visits' metrics
-      $dimensions = array('source');
-      $metrics    = array('visits', 'bounceRate');
+      $dim1 = 'source';
+      $met1 = 'visits';
+      $met2 = 'bounceRate';
 
-      /* We will sort the result by desending order of visits, 
-      and hence the '-' sign before the 'visits' string */
-      $ga->requestReportData(ga_profile_id, $dimensions, $metrics, '-visits');
+      $dimensions = array($dim1);
+      $metrics    = array($met1, $met2); #, 'bounceRate');
+      $call_dim1="get".ucwords($dim1); // e.g. getSource.
+      $call_met1="get".ucwords($met1); // e.g. getVisits.
+      $call_met2="get".ucwords($met2); // e.g. getBounceRate.
+      $print_order = '-'.$met1;
+      
+      // Date range for last 30 days (excluding today). Exactly the same as Google Analytics' last 30 Days range.
+      $last_30_days = date("Y-m-d", strtotime("-30 days"));
+      $yesterday = date("Y-m-d", strtotime("-1 days"));
+      echo ("<p>Date Range: $last_30_days - $yesterday</p>");
+
+      // We are using the 'source' dimension and the 'visits' metrics
+      $ga->requestReportData(ga_profile_id, $dimensions, $metrics, $print_order, $filter=null, $start_date=$last_30_days, $end_date=$yesterday);
       $gaResults = $ga->getResults();
-       $i=1;
-       foreach($gaResults as $result)
-       {
-       printf("%-4d %-40s %5d %5d<br>", // d stands for decimal, s stands for string.
-       $i++,
-       $result->getSource(),
-       $result->getVisits(),
-       $result->getBounceRate());
-       }
+      $i=1;
+      foreach($gaResults as $result)
+      {
+        printf("%-4d %-40s %5d %5d<br>", // d stands for decimal, s stands for string.
+        $i++,
+        $result->$call_dim1(),
+        $result->$call_met1(),
+        $result->$call_met2());
+      }
 
        global $array1;
        global $array2;
        $array1 = array();
        $array2 = array();
 
-       foreach($gaResults as $visitValue)
+       foreach($gaResults as $met1Value)
        {
-       	$array1 = array($visitValue->getVisits());
+        $array1 = array($met1Value->$call_met1());
        }
 
-       foreach($gaResults as $bounceRateValue)
+       foreach($gaResults as $met2Value)
        {
-        $array2 = array($bounceRateValue->getBounceRate());
+        $array2 = array($met2Value->$call_met2());
        }
 
        echo "<br>-----------------------------------------<br>";
@@ -71,15 +81,15 @@ class data_loader
        var_dump($array1);
        var_dump($array2);
 
-    $meanVisits = array_sum($array1) / count($array1);
-    $meanBounceRate = array_sum($array2) / count($array2);
-    echo "<br> Visits subscore = $meanVisits <br>";
-    echo "<br> Bounce Rate subscore 	= $meanBounceRate <br>";
+      $meanMet1 = array_sum($array1) / count($array1);
+      $meanMet2 = array_sum($array2) / count($array2);
+      echo "<br> $met1 subscore = $meanMet1 <br>";
+      echo "<br> $met2 subscore 	= $meanMet2 <br>";
 
-    global $percentageSum;
-    $percentageSum = $meanVisits + $meanBounceRate;
-    echo "<br> percentageSum = $percentageSum <br>";
-    return $percentageSum;
+      global $percentageSum;
+      $percentageSum = $meanMet1 + $meanMet2;
+      echo "<br> Percentage Sum = $percentageSum <br>";
+      return $percentageSum;
 
     
     }

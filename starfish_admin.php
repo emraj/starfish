@@ -3,7 +3,7 @@
 * starfish_admin.php generates the dashboard page for Starfish on the Reef.
 */
 
-// Required files.
+// Required classes.
 require('data_loader.class.php');
 require('logic.class.php');
 require('blog_ids.class.php');
@@ -22,17 +22,17 @@ echo ("<h1>Website Performance Index</h1>");
 $current_id = get_current_blog_id();   
 echo ("<p>Current Blog ID = $current_id</p>");
 
-#$site_url = get_site_url();
-$site_url = "umiapps.com";
+$site_url = get_site_url();
 echo ("<p>" . $site_url . "</p>");
 #$trimmed_url = preg_replace('#^https?://reef-local.umiapps.com#', '', $site_url) . "/";
 #echo ("<p>$trimmed_url</p>");
 
-echo ("The domain $site_url is <br>");
+echo ("The website, $site_url is <br>");
 $r_age = "125";
 $r_days = $r_age . " days old.";
 echo $r_days;
 
+// Test login details.
 $account = 'analyticsumi@gmail.com';
 $password = '124adigital';
 $profile_id = '82330474'; // Reef id.
