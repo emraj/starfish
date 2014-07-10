@@ -28,16 +28,16 @@ class dim_met
     return $ga;
   }
 
-  public function request_report($ga, $sub_attribute_input)
+  public function request_report($ga, $attribute_input)
   {
     // Date range for last 30 days (excluding today). Exactly the same as Google Analytics' last 30 Days range.
     $last_30_days = date("Y-m-d", strtotime("-30 days"));
     $yesterday = date("Y-m-d", strtotime("-1 days"));
     echo ("<p>Date Range: $last_30_days - $yesterday</p>");
 
-    $dimensions = $sub_attribute_input[0];
-    $metrics = $sub_attribute_input[1];
-    $print_order = $sub_attribute_input[2];
+    $dimensions = $attribute_input[0];
+    $metrics = $attribute_input[1];
+    $print_order = $attribute_input[2];
 
     // Request report for the last 30 days.
     $ga->requestReportData(ga_profile_id, $dimensions, $metrics, $print_order, $filter=null, $start_date=$last_30_days, $end_date=$yesterday);
@@ -47,39 +47,35 @@ class dim_met
     $i=1;
     foreach($gaResults as $result)
     {
-      printf("%-4d %-40s %5d<br>", // d stands for decimal, s stands for string.
+      printf("%-4d %-4s %-40s %-4s %-40s<br>", // d stands for decimal, s stands for string.
       $i++,
-      $result->$sub_attribute_input[3](),
-      $result->$sub_attribute_input[4]());
+      ")",
+      $result->$attribute_input[3](),
+      "/",
+      $result->$attribute_input[4]());
     }
     echo "<br>-----------------------------------------<br>";
     echo "Total Results : {$ga->getTotalResults()}<br>";
-  }
 
-  /*public function avg_met_value()
-  {
+    #public function avg_met_value($value)
+    #{
     global $values_array;
     $values_array = array();
 
     foreach($gaResults as $met_value)
     {
-    $values_array = array($met_value->$call_met1());
+      $values_array = array($met_value->$attribute_input[4]());
     }
-    
-    var_dump($values_array);
 
     $avg_met_value = array_sum($values_array) / count($values_array);
-    echo "<br> metric subscore = $avg_met_value <br>";
+    echo "<br> Attribute score = $avg_met_value <br>";
   }
-
-
-    
-
+   
+  /*   
     global $percentageSum;
     $percentageSum = $meanMet1 + $meanMet2;
     echo "<br> Percentage Sum = $percentageSum <br>";
     return $percentageSum;
-  }
   */
     
 }

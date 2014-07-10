@@ -44,11 +44,16 @@ $profile_id = '82330474'; // Reef id.
 
 
 #$p_sum = $dim_met_obj->connect_account($account, $password, $profile_id);
-$ga = $dim_met_obj->connect_account($account, $password, $profile_id);
-$new_users_input = $attributes_obj->new_users();
-$dim_met_obj->request_report($ga, $new_users_input);
 
-$logic_obj->normalise($r_days, $p_sum);
+$ga = $dim_met_obj->connect_account($account, $password, $profile_id);
+
+// Initialise all attributes.
+$dim_met_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->new_users())); // 'New Users' attribute.
+$dim_met_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->existing_users())); // 'Existing Users' attribute.
+$dim_met_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->user_loyalty())); // 'User Loyalty' attribute.
+
+
+#$logic_obj->normalise($r_days, $p_sum);
 
 
 
