@@ -3,8 +3,6 @@
 * blog_ids.class.php gets data from websites.csv file.
 */
 
-#require('domain_age.class.php');
-
 class blog_ids
 {
 	#public $file;
