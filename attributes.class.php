@@ -20,6 +20,20 @@ class attributes
 		return $attribute_input;
 	}
 
+	// 'Placed Ads' attribute.
+	public function placed_ads()
+	{
+		$dim_met = array('adGroup', 'impressions', '-impressions');
+		return $dim_met;
+	}
+
+	// 'Clickthrough Rate' attribute.
+	public function ctr()
+	{
+		$dim_met = array('adTargetingType', 'CTR', '-CTR');
+		return $dim_met;
+	}
+
 	// 'New Users' attribute.
 	public function new_users()
 	{
@@ -38,6 +52,13 @@ class attributes
 	public function user_loyalty()
 	{
 		$dim_met = array('daysSinceLastSession', 'users', '-users');
+		return $dim_met;
+	}
+
+	// 'Social Networking' attribute.
+	public function social_net()
+	{
+		$dim_met = array('source', 'visits', '-visits');
 		return $dim_met;
 	}
 

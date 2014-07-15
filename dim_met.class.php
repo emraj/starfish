@@ -6,7 +6,7 @@
 class dim_met
 {
   public $values_array;
-	public static $percentageSum;
+	public $avg_met_value;
 
   public function connect_account($set_account, $set_password, $set_profile_id)
   {
@@ -33,7 +33,7 @@ class dim_met
     // Date range for last 30 days (excluding today). Exactly the same as Google Analytics' last 30 Days range.
     $last_30_days = date("Y-m-d", strtotime("-30 days"));
     $yesterday = date("Y-m-d", strtotime("-1 days"));
-    echo ("<p>Date Range: $last_30_days - $yesterday</p>");
+    echo ("<br>Date Range: $last_30_days - $yesterday<br>");
 
     $dimensions = $attribute_input[0];
     $metrics = $attribute_input[1];
@@ -50,11 +50,10 @@ class dim_met
       printf("%-4d %-4s %-40s %-4s %-40s<br>", // d stands for decimal, s stands for string.
       $i++,
       ")",
-      $result->$attribute_input[3](),
+      $result->$attribute_input[3](), // Dimension.
       "/",
-      $result->$attribute_input[4]());
+      $result->$attribute_input[4]()); // Metric e.g. "getVisits".
     }
-    echo "<br>-----------------------------------------<br>";
     echo "Total Results : {$ga->getTotalResults()}<br>";
 
     #public function avg_met_value($value)
@@ -64,20 +63,16 @@ class dim_met
 
     foreach($gaResults as $met_value)
     {
-      $values_array = array($met_value->$attribute_input[4]());
+      array_push($values_array, $met_value->$attribute_input[4]());
     }
 
+    global $avg_met_value;
     $avg_met_value = array_sum($values_array) / count($values_array);
-    echo "<br> Attribute score = $avg_met_value <br>";
+    echo "Attribute score = $avg_met_value <br>";
+    echo "___________________________________________________<br>";
+    return $avg_met_value;
   }
-   
-  /*   
-    global $percentageSum;
-    $percentageSum = $meanMet1 + $meanMet2;
-    echo "<br> Percentage Sum = $percentageSum <br>";
-    return $percentageSum;
-  */
-    
+       
 }
 
 ?>
