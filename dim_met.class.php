@@ -38,9 +38,10 @@ class dim_met
     $dimensions = $attribute_input[0];
     $metrics = $attribute_input[1];
     $print_order = $attribute_input[2];
+    $filter = $attribute_input[3];
 
     // Request report for the last 30 days.
-    $ga->requestReportData(ga_profile_id, $dimensions, $metrics, $print_order, $filter=null, $start_date=$last_30_days, $end_date=$yesterday);
+    $ga->requestReportData(ga_profile_id, $dimensions, $metrics, $print_order, $filter, $start_date=$last_30_days, $end_date=$yesterday);
     $gaResults = $ga->getResults();
     
     // To print and confirm output. Remove snippet after development.
@@ -50,9 +51,9 @@ class dim_met
       printf("%-4d %-4s %-40s %-4s %-40s<br>", // d stands for decimal, s stands for string.
       $i++,
       ")",
-      $result->$attribute_input[3](), // Dimension.
-      "/",
-      $result->$attribute_input[4]()); // Metric e.g. "getVisits".
+      $result->$attribute_input[4](), // Dimension.
+      "!",
+      $result->$attribute_input[5]()); // Metric e.g. "getVisits".
     }
     echo "Total Results : {$ga->getTotalResults()}<br>";
 
@@ -63,7 +64,7 @@ class dim_met
 
     foreach($gaResults as $met_value)
     {
-      array_push($values_array, $met_value->$attribute_input[4]());
+      array_push($values_array, $met_value->$attribute_input[5]());
     }
 
     global $avg_met_value;

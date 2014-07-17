@@ -56,21 +56,32 @@ array_push($engagement_points, $dim_met_obj->request_report($ga, $attributes_obj
 // Initialise attributes for the 'User Acquisition' category.
 $acquisition_points = array();
 array_push($acquisition_points, $dim_met_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->social_net()))); // 'Social Networking' attribute.
+$count_posts = wp_count_posts();
+$published_posts = $count_posts->publish;
+#echo "Number of published blog posts: $published_posts"; // Confirm number of published blog posts.
+array_push($acquisition_points, $published_posts); // 'Blogging' attribute.
 
+// Initialise attributes for the 'Usability' category.
+$usability_points = array();
+array_push($usability_points, $dim_met_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->site_speed()))); // 'Site Speed' attribute.
 
 
 
 #$advertising_subscore = array_sum($advertising_points); // Advertising subscore.
 #echo "<p> Advertising subscore = $advertising_subscore </p>";
 
-$engagement_subscore = array_sum($engagement_points); // User Engagement subscore.
-echo "<p> User Engagement subscore = $engagement_subscore </p>";
-
 $acquisition_subscore = array_sum($acquisition_points); // User Acquisition subscore.
 echo "<p> User Acquisition subscore = $acquisition_subscore </p>";
 
+$usability_subscore = array_sum($usability_points); // Usability subscore.
+echo "<p> Usability subscore = $usability_subscore </p>";
+
+$engagement_subscore = array_sum($engagement_points); // User Engagement subscore.
+echo "<p> User Engagement subscore = $engagement_subscore </p>";
+
+
 // Aggregate score.
-$agg = $engagement_subscore + $acquisition_subscore;
+$agg = $acquisition_subscore + $usability_subscore + $engagement_subscore;
 echo "<p> Aggregate Score (all categories) = $agg </p>";
 
 // Apply logic.
