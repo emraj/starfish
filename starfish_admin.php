@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		
+	</head>
+
+	<body>
+
 <?php
 /**
 * starfish_admin.php generates the dashboard page for Starfish on the Reef.
@@ -47,13 +56,7 @@ $ga = $dim_met_obj->connect_account($account, $password, $profile_id);
 #array_push($advertising_points, $dim_met_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->placed_ads()))); // 'Placed Ads' attribute.
 #array_push($advertising_points, $dim_met_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->ctr()))); // 'Clickthrough Rate' attribute.
 
-// Initialise attributes for the 'User Engagement' category.
-$engagement_points = array();
-array_push($engagement_points, $dim_met_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->new_users()))); // 'New Users' attribute.
-array_push($engagement_points, $dim_met_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->existing_users()))); // 'Existing Users' attribute.
-array_push($engagement_points, $dim_met_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->user_loyalty()))); // 'User Loyalty' attribute.
-
-// Initialise attributes for the 'User Acquisition' category.
+// Initialise attributes for the 'Acquisition' category.
 $acquisition_points = array();
 array_push($acquisition_points, $dim_met_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->social_net()))); // 'Social Networking' attribute.
 $count_posts = wp_count_posts();
@@ -64,6 +67,18 @@ array_push($acquisition_points, $published_posts); // 'Blogging' attribute.
 // Initialise attributes for the 'Usability' category.
 $usability_points = array();
 array_push($usability_points, $dim_met_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->site_speed()))); // 'Site Speed' attribute.
+
+
+// Initialise attributes for the 'Engagement' category.
+$engagement_points = array();
+array_push($engagement_points, $dim_met_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->new_users()))); // 'New Users' attribute.
+array_push($engagement_points, $dim_met_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->existing_users()))); // 'Existing Users' attribute.
+array_push($engagement_points, $dim_met_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->user_loyalty()))); // 'User Loyalty' attribute.
+
+// Initialise attributes for the 'E-Commerce' category.
+#$ecommerce_points = array();
+#array_push($ecommerce_points, $dim_met_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->sales()))); // 'Sales' attribute.
+#array_push($ecommerce_points, $dim_met_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->rooms_booked()))); // 'Rooms Booked' attribute.
 
 
 
@@ -79,6 +94,9 @@ echo "<p> Usability subscore = $usability_subscore </p>";
 $engagement_subscore = array_sum($engagement_points); // User Engagement subscore.
 echo "<p> User Engagement subscore = $engagement_subscore </p>";
 
+#$ecommerce_subscore = array_sum($ecommerce_points); // User Engagement subscore.
+#echo "<p> User Engagement subscore = $ecommerce_subscore </p>";
+
 
 // Aggregate score.
 $agg = $acquisition_subscore + $usability_subscore + $engagement_subscore;
@@ -88,3 +106,30 @@ echo "<p> Aggregate Score (all categories) = $agg </p>";
 $logic_obj->normalise($r_age, $agg);
 
 ?>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <!-- pie chart -->
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Category',    'Subscore'],
+          ['Acquisition', <?php echo intval($acquisition_subscore); ?>],
+          ['Usability',   <?php echo intval($usability_subscore); ?>],
+          ['Engagement',  <?php echo intval($engagement_subscore); ?>]
+        ]);
+
+        var options = {
+          title: 'CATEGORIES'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+    </script>
+<div id="piechart" style="width: 600px; height: 350px;"></div>
+
+</body>
+</html>

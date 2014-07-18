@@ -22,7 +22,7 @@ function display_admin()
 
 function starfish_admin_actions()
 {
-    add_menu_page( 'Starfish | umiApps', 'Starfish Index', 'manage_options', 'starfish/starfish.php', 'display_admin', 'dashicons-star-filled', '71.5');
+    add_menu_page( 'Starfish | umiApps', 'Website Performance', 'manage_options', 'starfish/starfish.php', 'display_admin', 'dashicons-star-filled', '71.5');
 }
 
 add_action('admin_menu', 'starfish_admin_actions');

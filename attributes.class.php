@@ -73,6 +73,19 @@ class attributes
 		return $dim_met;
 	}
 
+	// 'Sales' attribute.
+	public function sales()
+	{
+		$dim_met = array('transactionId', 'transaction', '-transaction', null);
+		return $dim_met;
+	}
+
+	// 'Rooms Booked' attribute.
+	public function rooms_booked()
+	{
+		$dim_met = array('productName', 'itemQuantity', '-itemQuantity', null);
+		return $dim_met;
+	}
 
 
 }

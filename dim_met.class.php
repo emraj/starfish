@@ -69,7 +69,7 @@ class dim_met
 
     global $avg_met_value;
     $avg_met_value = array_sum($values_array) / count($values_array);
-    echo "Attribute score = $avg_met_value <br>";
+    echo "Attribute subscore = $avg_met_value <br>";
     echo "___________________________________________________<br>";
     return $avg_met_value;
   }
