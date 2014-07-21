@@ -17,7 +17,8 @@ function main_call()
 
 function display_admin()
 {
-    require('starfish_admin.php');
+    require ('starfish_admin.php');
+    #require('style/dashboard.html');
 }
 
 function starfish_admin_actions()

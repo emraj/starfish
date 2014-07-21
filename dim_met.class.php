@@ -20,9 +20,9 @@ class dim_met
     define('ga_profile_id' , $profile_id);
 
     // Confirm login details in use.
-    echo ("<p>$account</p>");
-    echo ("<p>$password</p>");
-    echo ("<p>$profile_id</p>");
+    #echo ("<p>$account</p>");
+    #echo ("<p>$password</p>");
+    #echo ("<p>$profile_id</p>");
     
     $ga = new gapi(ga_account,ga_password);
     return $ga;
@@ -33,7 +33,7 @@ class dim_met
     // Date range for last 30 days (excluding today). Exactly the same as Google Analytics' last 30 Days range.
     $last_30_days = date("Y-m-d", strtotime("-30 days"));
     $yesterday = date("Y-m-d", strtotime("-1 days"));
-    echo ("<br>Date Range: $last_30_days - $yesterday<br>");
+    #echo ("<br>Date Range: $last_30_days - $yesterday<br>");
 
     $dimensions = $attribute_input[0];
     $metrics = $attribute_input[1];
@@ -48,14 +48,16 @@ class dim_met
     $i=1;
     foreach($gaResults as $result)
     {
+      /*
       printf("%-4d %-4s %-40s %-4s %-40s<br>", // d stands for decimal, s stands for string.
       $i++,
       ")",
       $result->$attribute_input[4](), // Dimension.
       "!",
       $result->$attribute_input[5]()); // Metric e.g. "getVisits".
+      */
     }
-    echo "Total Results : {$ga->getTotalResults()}<br>";
+   # echo "Total Results : {$ga->getTotalResults()}<br>";
 
     #public function avg_met_value($value)
     #{
@@ -69,8 +71,8 @@ class dim_met
 
     global $avg_met_value;
     $avg_met_value = array_sum($values_array) / count($values_array);
-    echo "Attribute subscore = $avg_met_value <br>";
-    echo "___________________________________________________<br>";
+    #echo "Attribute subscore = $avg_met_value <br>";
+    #echo "___________________________________________________<br>";
     return $avg_met_value;
   }
        

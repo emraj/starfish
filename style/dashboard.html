@@ -18,6 +18,108 @@
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
 
+    
+    <style>
+    .row {
+      margin-right: -15px;
+      margin-left: -15px;
+    }
+
+    .row:before,
+    .row:after {
+      display: table;
+      content: " ";
+    }
+
+    .row:after {
+      clear: both;
+    }
+
+    .row:before,
+    .row:after {
+      display: table;
+      content: " ";
+    }
+
+    .row:after {
+      clear: both;
+    }
+
+    body{
+      background-color: #e9e9e9;
+      list-style: none;
+    }
+    body ul{
+      list-style: none;
+      font-family: arial;
+      font-weight: normal;
+    }
+    .titles{
+      text-align: center;
+      font-size: 34px;
+      font-family: Arial;
+      color:#00aded;
+      text-transform:uppercase;
+      margin-top: 20px;
+    }
+    .titles ul{
+      list-style: none;
+    }
+    .titles li:nth-child(1){
+      float: left;
+    }
+    .titles li:nth-child(3){
+      float: right;
+      margin-top: -45px;
+    }
+    .linebrake{
+      width: 100%;
+      height: 1px;
+      background-color: #d1cfcf;
+      margin-top: 1px;
+      margin-bottom: 10px;
+    }
+    .user{
+      text-transform:uppercase;
+      font-size: 30px;
+      color: #6e6e6e;
+    }
+    .user li:nth-child(1){
+      float: left;
+    }
+    .user li:nth-child(2){
+      margin-left: 48%;
+    }
+    .viewblock{
+      height: 36px;
+      width: 133px;
+      background-color: #CECECE;
+      /* float: left; */
+      border-radius: 5px;
+      margin-left: 51px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      text-align: center;
+      padding-top: 6px;
+      padding-left:24px;
+      color: #ffffff;
+    }
+    .panel-group{
+      width: 100%;
+    }
+    .holder{
+      margin-top: -40px;
+    }
+    .viewblock p{
+      position: absolute;
+    }
+    .container{
+      width: 85%;
+      margin: 0 auto 0 auto;
+    }
+
+    </style>
+
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
@@ -26,6 +128,7 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+
 
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
@@ -49,6 +152,9 @@
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
         chart.draw(data, options);
+
+        var chart2 = new google.visualization.PieChart(document.getElementById('piechart2'));
+        chart2.draw(data, options);
       }
     </script>
 
@@ -59,8 +165,8 @@
       <div class="row">
         <div class="titles col-md-12">
           <ul>
-            <li>attribute</li>
-            <li>subscore(%)</li>
+            <li>category</li>
+            <li>score (%)</li>
             <li>trend</li>
           </ul>
           <div class="linebrake"></div>
@@ -69,22 +175,21 @@
       <div class="row">
         <div class="user col-md-12">
           <ul>
-            <li>user</li>
+            <li>ADVERTISING</li>
             <li>46%</li>
             <div class="col-md-4 col-md-offset-8">
               <div class="holder">
+                 <div id="piechart" style="width: 350px; height: 300px; float:right;"></div>
                 <div class="panel-group" id="accordion">
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                          GRAPH 
-                        </a>
+                        
                       </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in">
                       <div class="panel-body">
-                        <div id="piechart" style="width: 350px; height: 300px;"></div>
+                       
                       </div>
                     </div>
                   </div>
@@ -96,7 +201,7 @@
             <a href="#">
               <div class="viewblock">
                 <div class="viewtext">
-                  <p>view text</p>
+                  <p>view attributes</p>
                 </div>
               </div>
             </a>
@@ -107,54 +212,16 @@
       <div class="row">
         <div class="user col-md-12">
           <ul>
-            <li>social networking</li>
+            <li>ACQUISITION</li>
             <li>46%</li>
              <div class="col-md-4 col-md-offset-8">
               <div class="holder">
+                <div id="piechart2" style="width: 350px; height: 300px; float:right;"></div>
                 <div class="panel-group" id="accordion">
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                          GRAPH 
-                        </a>
-                      </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse in">
-                      <div class="panel-body">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ul>
-          <div class="row">
-            <a href="#">
-              <div class="viewblock">
-                <div class="viewtext">
-                  <p>view text</p>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="linebrake"></div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="user col-md-12">
-          <ul>
-            <li>e-commerce</li>
-            <li>46%</li>
-             <div class="col-md-4 col-md-offset-8">
-              <div class="holder">
-                <div class="panel-group" id="accordion">
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                          GRAPH 
-                        </a>
+                        
                       </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in">
@@ -170,7 +237,7 @@
             <a href="#">
               <div class="viewblock">
                 <div class="viewtext">
-                  <p>view text</p>
+                  <p>view attributes</p>
                 </div>
               </div>
             </a>
@@ -181,17 +248,16 @@
       <div class="row">
         <div class="user col-md-12">
           <ul>
-            <li>advertising</li>
+            <li>USABILITY</li>
             <li>46%</li>
              <div class="col-md-4 col-md-offset-8">
               <div class="holder">
+                <div id="piechart" style="width: 350px; height: 300px; float:right;"></div>
                 <div class="panel-group" id="accordion">
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                          GRAPH 
-                        </a>
+                        
                       </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in">
@@ -207,7 +273,7 @@
             <a href="#">
               <div class="viewblock">
                 <div class="viewtext">
-                  <p>view text</p>
+                  <p>view attributes</p>
                 </div>
               </div>
             </a>
@@ -218,17 +284,52 @@
       <div class="row">
         <div class="user col-md-12">
           <ul>
-            <li>site usability</li>
+            <li>ENGAGEMENT</li>
             <li>46%</li>
              <div class="col-md-4 col-md-offset-8">
               <div class="holder">
+                <div id="piechart" style="width: 350px; height: 300px; float:right;"></div>
+                <div class="panel-group" id="accordion">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        
+                      </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                      <div class="panel-body">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ul>
+          <div class="row">
+            <a href="#">
+              <div class="viewblock">
+                <div class="viewtext">
+                  <p>view attributes</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="linebrake"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="user col-md-12">
+          <ul>
+            <li>E-COMMERCE</li>
+            <li>46%</li>
+             <div class="col-md-4 col-md-offset-8">
+              <div class="holder">
+                <div id="piechart" style="width: 350px; height: 300px; float:right;"></div>
                 <div class="panel-default" id="accordion">
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                         GRAPH 
-                        </a>
+                        
                       </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in">
@@ -244,7 +345,7 @@
             <a href="#">
               <div class="viewblock">
                 <div class="viewtext">
-                  <p>view text</p>
+                  <p>view attributes</p>
                 </div>
               </div>
             </a>

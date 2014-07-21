@@ -15,32 +15,30 @@
 // Required classes.
 require('dim_met.class.php');
 require('logic.class.php');
-require('blog_ids.class.php');
 require('domain_age.class.php');
 require('attributes.class.php');
 require('gapi.class.php');
 
 // Instantiate classes.
-$blog_ids_obj = new blog_ids();
 $dim_met_obj = new dim_met();
 $logic_obj = new logic();
 $domain_age_obj = new domain_age();
 $attributes_obj = new attributes();
 
 // Print title.
-echo ("<h1>Website Performance Index</h1>");
+#echo ("<h1>Website Performance Index</h1>");
 
 // Get the current blog/website ID.
 $current_id = get_current_blog_id();   
-echo ("<p>Current Blog ID = $current_id</p>");
+#echo ("<p>Current Blog ID = $current_id</p>");
 
 $site_url = get_site_url();
-echo ("<p>" . $site_url . "</p>");
+#echo ("<p>" . $site_url . "</p>");
 
 // Website's age.
-echo ("The website, $site_url is <br>");
+#echo ("The website, $site_url is <br>");
 $r_age = "125"; // In days.
-echo $r_age;
+#echo $r_age;
 
 // Demo login details.
 $account = 'analyticsumi@gmail.com';
@@ -81,18 +79,17 @@ array_push($engagement_points, $dim_met_obj->request_report($ga, $attributes_obj
 #array_push($ecommerce_points, $dim_met_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->rooms_booked()))); // 'Rooms Booked' attribute.
 
 
-
 #$advertising_subscore = array_sum($advertising_points); // Advertising subscore.
 #echo "<p> Advertising subscore = $advertising_subscore </p>";
 
 $acquisition_subscore = array_sum($acquisition_points); // User Acquisition subscore.
-echo "<p> User Acquisition subscore = $acquisition_subscore </p>";
+#echo "<p> User Acquisition subscore = $acquisition_subscore </p>";
 
 $usability_subscore = array_sum($usability_points); // Usability subscore.
-echo "<p> Usability subscore = $usability_subscore </p>";
+#echo "<p> Usability subscore = $usability_subscore </p>";
 
 $engagement_subscore = array_sum($engagement_points); // User Engagement subscore.
-echo "<p> User Engagement subscore = $engagement_subscore </p>";
+#echo "<p> User Engagement subscore = $engagement_subscore </p>";
 
 #$ecommerce_subscore = array_sum($ecommerce_points); // User Engagement subscore.
 #echo "<p> User Engagement subscore = $ecommerce_subscore </p>";
@@ -100,12 +97,18 @@ echo "<p> User Engagement subscore = $engagement_subscore </p>";
 
 // Aggregate score.
 $agg = $acquisition_subscore + $usability_subscore + $engagement_subscore;
-echo "<p> Aggregate Score (all categories) = $agg </p>";
+#echo "<p> Aggregate Score (all categories) = $agg </p>";
 
 // Apply logic.
 $logic_obj->normalise($r_age, $agg);
 
 ?>
+<br>
+<h2>The Performance Index for your website is: 78%</h2>
+
+The Index represents how well your website is doing. It is the cumulative score of certain website metrics, which are popularly <br>
+used in measuring and analysing performance. To find out more about a metric category, click on its slice in the pie chart.
+<br>
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
@@ -122,14 +125,48 @@ $logic_obj->normalise($r_age, $agg);
         ]);
 
         var options = {
-          title: 'CATEGORIES'
+          title: 'CATEGORIES',
+          is3D: true,
+          chartArea: {left:50,top:50},
+          backgroundColor: {stroke:'#00cc00'},
+          forceIFrame: true
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+
+        function selectHandler() {
+          var selectedItem = chart.getSelection()[0];
+          if (selectedItem) {
+            var value = data.getValue(selectedItem.row, 0);
+            alert('The user selected ' + value);
+            if (value == 'Usability') {
+              jQuery( document ).ready(function() {
+                jQuery('#mynote').html('Web usability is the ease of use of a website.');
+              });
+            }
+            else if (value == 'Engagement') {
+              jQuery( document ).ready(function() {
+                jQuery('#mynote').html('Customer engagement is the engagement of customers with one another, with a company or a brand.');
+              });
+            }
+            
+          }
+        }
+
+        google.visualization.events.addListener(chart, 'select', selectHandler);
+
         chart.draw(data, options);
       }
+
+      //jQuery( document ).ready(function() {
+        //jQuery('#mynote').html('mystring');
+      //});
+
     </script>
-<div id="piechart" style="width: 600px; height: 350px;"></div>
+<div id="piechart" style="width: 500px; height: 300px;"></div>
+<div id="mynote" style="width: 500px; height: 300px;"></div>
+
 
 </body>
 </html>
