@@ -44,7 +44,7 @@ class dim_met
     $ga->requestReportData(ga_profile_id, $dimensions, $metrics, $print_order, $filter, $start_date=$last_30_days, $end_date=$yesterday);
     $gaResults = $ga->getResults();
     
-    // To print and confirm output. Remove snippet after development.
+    // To print and confirm output for testing. Comment in or out as needed.
     $i=1;
     foreach($gaResults as $result)
     {

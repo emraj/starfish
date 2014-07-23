@@ -15,15 +15,20 @@ function main_call()
 	echo ("<h3> Website Performance Index Plugin<br> for Reef's Sites </h3>");
 }
 
-function display_admin()
+function display_dashboard()
 {
-    require ('starfish_admin.php');
-    #require('style/dashboard.html');
+    require ('starfish_dashboard.php');
 }
+
+#function display_admin()
+#{
+#    require ('starfish_admin.php');
+#}
 
 function starfish_admin_actions()
 {
-    add_menu_page( 'Starfish | umiApps', 'Website Performance', 'manage_options', 'starfish/starfish.php', 'display_admin', 'dashicons-star-filled', '71.5');
+    add_menu_page( 'Starfish | umiApps', 'Performance Index', 'manage_options', 'starfish.php', 'display_dashboard', 'dashicons-star-filled', '71.5');
+    #add_options_page( 'Index Settings', 'Index Settings', 'manage_options', 'starfish.php', 'display_admin');
 }
 
 add_action('admin_menu', 'starfish_admin_actions');

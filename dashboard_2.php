@@ -7,17 +7,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
-    <script language="JavaScript" type="text/javascript" src="js/jquery.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-    <script language="JavaScript" type="text/javascript" src="js/skrollr.js"></script>
-    <title>starfish</title>
-        <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
     
-
-    <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet">
-
+    <title>starfish</title>
     
     <style>
     .row {
@@ -130,44 +121,100 @@
     <![endif]-->
 
 
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
-    <!-- pie chart -->
+    <!-- Social Networking pie chart -->
     <script type="text/javascript">
+
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
+          ['Social networking site',    'sessions'],
+          ['facebook.com',    14],
+          ['m.facebook.com',  3],
+          ['plus.google.com', 3],
+          ['twitter.com',     1],
+          ['linkedin.com',    0]
         ]);
 
         var options = {
-          title: 'My Daily Activities'
+          title: 'Social Networking',
+          is3D: true,
+          chartArea: {left:150,top:10,width:450,height:300},
+          colors:['#0000FF','#0000FF','#FE2E2E','#2E9AFE'],
+          legend: {position: 'none'},
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        var chart = new google.visualization.PieChart(document.getElementById('sonet_chart'));
         chart.draw(data, options);
 
-        var chart2 = new google.visualization.PieChart(document.getElementById('piechart2'));
-        chart2.draw(data, options);
+        //var chart2 = new google.visualization.PieChart(document.getElementById('piechart2'));
+        //chart2.draw(data, options);
       }
+    </script>
+
+    <!-- Site Speed gauge chart -->
+    <script type='text/javascript'>
+      google.load('visualization', '1', {packages:['gauge']});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Load Time', 80],
+        ]);
+
+        var options = {
+          width: 400, height: 120,
+          redFrom: 90, redTo: 100,
+          yellowFrom:75, yellowTo: 90,
+          minorTicks: 5,
+          width:540,
+          height:310,
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('speed_chart'));
+        chart.draw(data, options);
+      }
+    </script>
+
+    <!-- User Loyalty geo chart -->
+    <script type='text/javascript'>
+     google.load('visualization', '1', {'packages': ['geochart']});
+     google.setOnLoadCallback(drawRegionsMap);
+
+      function drawRegionsMap() {
+        var data = google.visualization.arrayToDataTable([
+          ['Country', 'Popularity'],
+          ['Germany', 200],
+          ['United States', 300],
+          ['Brazil', 400],
+          ['Canada', 500],
+          ['France', 600],
+          ['RU', 700]
+        ]);
+
+        var options = {
+          width:395,
+          height:300,
+        };
+
+        var chart = new google.visualization.GeoChart(document.getElementById('loyalty_chart'));
+        chart.draw(data, options);
+    };
     </script>
 
   </head>
 
   <body>
+    <div style="width:850px; height:2500px; background-color:#ffffff;">
     <div class="container">
       <div class="row">
         <div class="titles col-md-12">
           <ul>
-            <li>category</li>
-            <li>score (%)</li>
-            <li>trend</li>
+            <!--<li>attribute</li>
+            <li>subscore (%)</li>
+            <li>chart</li>-->
           </ul>
           <div class="linebrake"></div>
         </div>
@@ -175,11 +222,11 @@
       <div class="row">
         <div class="user col-md-12">
           <ul>
-            <li>ADVERTISING</li>
-            <li>46%</li>
+            <li>social networking</li>
+            <li>18%</li>
             <div class="col-md-4 col-md-offset-8">
               <div class="holder">
-                 <div id="piechart" style="width: 350px; height: 300px; float:right;"></div>
+                 <div id="sonet_chart" style="width: 500px; height: 300px; float:right;"></div>
                 <div class="panel-group" id="accordion">
                   <div class="panel panel-default">
                     <div class="panel-heading">
@@ -201,7 +248,7 @@
             <a href="#">
               <div class="viewblock">
                 <div class="viewtext">
-                  <p>view attributes</p>
+                  <p>imporove subscore</p>
                 </div>
               </div>
             </a>
@@ -209,14 +256,15 @@
           <div class="linebrake"></div>
         </div>
       </div>
+      
       <div class="row">
         <div class="user col-md-12">
           <ul>
-            <li>ACQUISITION</li>
-            <li>46%</li>
+            <li>site speed</li>
+            <li>66%</li>
              <div class="col-md-4 col-md-offset-8">
               <div class="holder">
-                <div id="piechart2" style="width: 350px; height: 300px; float:right;"></div>
+                <div id="speed_chart" style="width: 350px; height: 300px; float:right;"></div>
                 <div class="panel-group" id="accordion">
                   <div class="panel panel-default">
                     <div class="panel-heading">
@@ -237,7 +285,7 @@
             <a href="#">
               <div class="viewblock">
                 <div class="viewtext">
-                  <p>view attributes</p>
+                  <p>imporove subscore</p>
                 </div>
               </div>
             </a>
@@ -248,11 +296,11 @@
       <div class="row">
         <div class="user col-md-12">
           <ul>
-            <li>USABILITY</li>
+            <li>user loyalty</li>
             <li>46%</li>
              <div class="col-md-4 col-md-offset-8">
               <div class="holder">
-                <div id="piechart" style="width: 350px; height: 300px; float:right;"></div>
+                <div id="loyalty_chart" style="width: 350px; height: 300px; float:right;"></div>
                 <div class="panel-group" id="accordion">
                   <div class="panel panel-default">
                     <div class="panel-heading">
@@ -273,7 +321,7 @@
             <a href="#">
               <div class="viewblock">
                 <div class="viewtext">
-                  <p>view attributes</p>
+                  <p>imporove subscore</p>
                 </div>
               </div>
             </a>
@@ -281,78 +329,8 @@
           <div class="linebrake"></div>
         </div>
       </div>
-      <div class="row">
-        <div class="user col-md-12">
-          <ul>
-            <li>ENGAGEMENT</li>
-            <li>46%</li>
-             <div class="col-md-4 col-md-offset-8">
-              <div class="holder">
-                <div id="piechart" style="width: 350px; height: 300px; float:right;"></div>
-                <div class="panel-group" id="accordion">
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h4 class="panel-title">
-                        
-                      </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse in">
-                      <div class="panel-body">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ul>
-          <div class="row">
-            <a href="#">
-              <div class="viewblock">
-                <div class="viewtext">
-                  <p>view attributes</p>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="linebrake"></div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="user col-md-12">
-          <ul>
-            <li>E-COMMERCE</li>
-            <li>46%</li>
-             <div class="col-md-4 col-md-offset-8">
-              <div class="holder">
-                <div id="piechart" style="width: 350px; height: 300px; float:right;"></div>
-                <div class="panel-default" id="accordion">
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h4 class="panel-title">
-                        
-                      </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse in">
-                      <div class="panel-body">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ul>
-          <div class="row">
-            <a href="#">
-              <div class="viewblock">
-                <div class="viewtext">
-                  <p>view attributes</p>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="linebrake"></div>
-        </div>
-      </div>
+      
     </div>
+  </div>
   </body>
 </html>
