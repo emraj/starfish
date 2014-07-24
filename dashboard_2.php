@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     
     <title>starfish</title>
     
@@ -93,8 +94,40 @@
       text-align: center;
       padding-top: 6px;
       padding-left:24px;
-      color: #ffffff;
+      color: #ffffff; 
     }
+    .viewtext {
+            border-radius: 3px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            background-color: #00aded;
+            color: #eee;
+            font-weight: bold;
+            margin-bottom: 2em;
+            margin-left: 57px;
+            text-transform: uppercase;
+            width: 30%;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-top: 30px;
+
+        }
+            .viewtext a {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            text-decoration: none;
+            color:white;
+          }
+            .viewtext:hover {
+              background-color: #008ABD;
+            
+        }
+
+        #login form input[type="submit"]:hover {
+            background-color: #0074a2;
+        }
     .panel-group{
       width: 100%;
     }
@@ -108,7 +141,10 @@
       width: 85%;
       margin: 0 auto 0 auto;
     }
-
+    .performancestats {
+      width: 100%;
+      text-align: center;
+    }
     </style>
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
@@ -207,7 +243,7 @@
   </head>
 
   <body>
-    <div style="width:850px; height:2500px; background-color:#ffffff;">
+    <div class="performancestats" style="height:2500px; background-color:#ffffff;">
     <div class="container">
       <div class="row">
         <div class="titles col-md-12">
@@ -245,13 +281,11 @@
             </div>
           </ul>
           <div class="row">
-            <a href="#">
-              <div class="viewblock">
+              <div class="">
                 <div class="viewtext">
-                  <p>imporove subscore</p>
+                  <a href="#">Improve Subscore</a>
                 </div>
               </div>
-            </a>
           </div>
           <div class="linebrake"></div>
         </div>
@@ -282,13 +316,12 @@
             </div>
           </ul>
           <div class="row">
-            <a href="#">
-              <div class="viewblock">
+
+              <div class="">
                 <div class="viewtext">
-                  <p>imporove subscore</p>
+                  <a href="#">Improve Subscore</a>
                 </div>
               </div>
-            </a>
           </div>
           <div class="linebrake"></div>
         </div>
@@ -318,13 +351,11 @@
             </div>
           </ul>
           <div class="row">
-            <a href="#">
-              <div class="viewblock">
+              <div class="">
                 <div class="viewtext">
-                  <p>imporove subscore</p>
+                  <a href="#">Improve Subscore</a>
                 </div>
               </div>
-            </a>
           </div>
           <div class="linebrake"></div>
         </div>
