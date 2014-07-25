@@ -11,7 +11,7 @@ class normalise
     {
     	$real_age = $site_age;
     	$real_index = $index; // Site's real aggregate score. Perfect score is 100%.
-  		$normalised_age = 365;
+  		$normalised_age = 365; // Normalise to a year.
 		$common_quotient = $real_age / $normalised_age; // Common quotient derived from cross-multiplication.
 		$normalised_index = $real_index / $common_quotient;
 	}

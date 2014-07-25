@@ -38,7 +38,7 @@ class report
     $ga->requestReportData(ga_profile_id, $dimensions, $metrics, $print_order, $filter, $start_date=$last_30_days, $end_date=$yesterday);
     $gaResults = $ga->getResults();
     
-    // Insert Snippet 4 here from extra_code.txt; To print and confirm requested Analytics data.
+    // Insert Snippet 4 here from snippets.txt; To print and confirm requested Analytics data.
 
     // Calculate average metric value.
     global $values_array;

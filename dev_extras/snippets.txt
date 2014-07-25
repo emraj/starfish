@@ -31,3 +31,21 @@ foreach($gaResults as $result)
   $result->$attribute_input[5]()); // Metric e.g. "getVisits".
 }
 echo "Total Results : {$ga->getTotalResults()}<br>";
+
+SNIPPET 5
+//The required classes and instances needed for normalisation.
+require('normalise.class.php');
+require('domain_age.class.php');
+$normalise_obj = new normalise();
+$domain_age_obj = new domain_age();
+
+SNIPPET 6
+// Normalise website's index and age.
+$normalise_obj->normalise_age_index($site_age, $index);
+
+SNIPPET 7
+// Get current blog/website ID.
+$current_blog_id = get_current_blog_id();   
+// Get current website URL.
+$site_url = get_site_url();
+
