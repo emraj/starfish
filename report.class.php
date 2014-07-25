@@ -1,9 +1,10 @@
 <?php
 /**
-* dim_met.class.php generates the dashboard page for Starfish on the Reef.
+* report.class.php
+* Generates report from Google Analytics.
 */
 
-class dim_met
+class report
 {
   public $values_array;
 	public $avg_met_value;
@@ -18,12 +19,6 @@ class dim_met
   	define('ga_account'    , $account);
     define('ga_password'   , $password);
     define('ga_profile_id' , $profile_id);
-
-    // Confirm login details in use.
-    #echo ("<p>$account</p>");
-    #echo ("<p>$password</p>");
-    #echo ("<p>$profile_id</p>");
-    
     $ga = new gapi(ga_account,ga_password);
     return $ga;
   }
@@ -33,7 +28,6 @@ class dim_met
     // Date range for last 30 days (excluding today). Exactly the same as Google Analytics' last 30 Days range.
     $last_30_days = date("Y-m-d", strtotime("-30 days"));
     $yesterday = date("Y-m-d", strtotime("-1 days"));
-    #echo ("<br>Date Range: $last_30_days - $yesterday<br>");
 
     $dimensions = $attribute_input[0];
     $metrics = $attribute_input[1];
@@ -44,35 +38,16 @@ class dim_met
     $ga->requestReportData(ga_profile_id, $dimensions, $metrics, $print_order, $filter, $start_date=$last_30_days, $end_date=$yesterday);
     $gaResults = $ga->getResults();
     
-    // To print and confirm output for testing. Comment in or out as needed.
-    $i=1;
-    foreach($gaResults as $result)
-    {
-      /*
-      printf("%-4d %-4s %-40s %-4s %-40s<br>", // d stands for decimal, s stands for string.
-      $i++,
-      ")",
-      $result->$attribute_input[4](), // Dimension.
-      "!",
-      $result->$attribute_input[5]()); // Metric e.g. "getVisits".
-      */
-    }
-   # echo "Total Results : {$ga->getTotalResults()}<br>";
+    // Insert Snippet 4 here from extra_code.txt; To print and confirm requested Analytics data.
 
-    #public function avg_met_value($value)
-    #{
+    // Calculate average metric value.
     global $values_array;
     $values_array = array();
-
-    foreach($gaResults as $met_value)
-    {
+    foreach($gaResults as $met_value){
       array_push($values_array, $met_value->$attribute_input[5]());
     }
-
     global $avg_met_value;
     $avg_met_value = array_sum($values_array) / count($values_array);
-    #echo "Attribute subscore = $avg_met_value <br>";
-    #echo "___________________________________________________<br>";
     return $avg_met_value;
   }
        

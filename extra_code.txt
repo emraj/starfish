@@ -1,0 +1,33 @@
+SNIPPET 1
+// Calculate total score for 'Advertising' category.
+$advertising_subscores = array();
+array_push($advertising_points, $report_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->placed_ads()))); //Subscore for 'Placed Ads' attribute.
+array_push($advertising_subscores, $report_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->ctr()))); //Subscore for 'Clickthrough Rate' attribute.
+#$advertising_score = array_sum($advertising_subscores); // Total score for 'Advertising' category.
+
+SNIPPET 2
+// Calculate total score for 'E-Commerce' category.
+$ecommerce_subscores = array();
+array_push($ecommerce_subscores, $report_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->sales()))); // Subscore for 'Sales' attribute.
+array_push($ecommerce_subscores, $report_obj->request_report($ga, $attributes_obj->build_attribute($attributes_obj->rooms_booked()))); // Subscore for 'Rooms Booked' attribute.
+#$ecommerce_score = array_sum($ecommerce_subscores); // Total score for 'E-Commerce' category.
+
+SNIPPET 3
+// Reef's login details for testing purposes.
+$account = 'analyticsumi@gmail.com';
+$password = '124adigital';
+$profile_id = '82330474';
+
+SNIPPET 4
+// To print and confirm requested Analytics data.
+$i=1;
+foreach($gaResults as $result)
+{
+  printf("%-4d %-4s %-40s %-4s %-40s<br>", // d stands for decimal, s stands for string.
+  $i++,
+  ")",
+  $result->$attribute_input[4](), // Dimension.
+  "!",
+  $result->$attribute_input[5]()); // Metric e.g. "getVisits".
+}
+echo "Total Results : {$ga->getTotalResults()}<br>";

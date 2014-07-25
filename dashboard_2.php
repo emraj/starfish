@@ -1,16 +1,24 @@
+<?php
+/**
+* dashboard_2.php
+* Displays attributes subscores.  
+*/
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
+  
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-    
-    <title>starfish</title>
-    
+  </head>
+
+  <body>
+
     <style>
     .row {
       margin-right: -15px;
@@ -147,102 +155,82 @@
     }
     </style>
 
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-
-
-   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-
     <!-- Social Networking pie chart -->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+    
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Social networking site',    'sessions'],
+        ['facebook.com',    14],
+        ['m.facebook.com',  3],
+        ['plus.google.com', 3],
+        ['twitter.com',     1],
+        ['linkedin.com',    0]
+      ]);
+      var options = {
+        title: 'Social Networking',
+        is3D: true,
+        chartArea: {left:150,top:10,width:450,height:300},
+        colors:['#0000FF','#0000FF','#FE2E2E','#2E9AFE'],
+        legend: {position: 'none'}
+      };
 
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Social networking site',    'sessions'],
-          ['facebook.com',    14],
-          ['m.facebook.com',  3],
-          ['plus.google.com', 3],
-          ['twitter.com',     1],
-          ['linkedin.com',    0]
-        ]);
-
-        var options = {
-          title: 'Social Networking',
-          is3D: true,
-          chartArea: {left:150,top:10,width:450,height:300},
-          colors:['#0000FF','#0000FF','#FE2E2E','#2E9AFE'],
-          legend: {position: 'none'},
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('sonet_chart'));
-        chart.draw(data, options);
-
-        //var chart2 = new google.visualization.PieChart(document.getElementById('piechart2'));
-        //chart2.draw(data, options);
-      }
+      var chart = new google.visualization.PieChart(document.getElementById('sonet_chart'));
+      chart.draw(data, options);
+    }
     </script>
 
     <!-- Site Speed gauge chart -->
     <script type='text/javascript'>
-      google.load('visualization', '1', {packages:['gauge']});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Label', 'Value'],
-          ['Load Time', 80],
-        ]);
+    google.load('visualization', '1', {packages:['gauge']});
+    google.setOnLoadCallback(drawChart);
 
-        var options = {
-          width: 400, height: 120,
-          redFrom: 90, redTo: 100,
-          yellowFrom:75, yellowTo: 90,
-          minorTicks: 5,
-          width:540,
-          height:310,
-        };
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Label', 'Value'],
+        ['Load Time', 80]
+      ]);
+      var options = {
+        width: 400, height: 120,
+        redFrom: 90, redTo: 100,
+        yellowFrom:75, yellowTo: 90,
+        minorTicks: 5,
+        width:540,
+        height:310,
+      };
 
-        var chart = new google.visualization.Gauge(document.getElementById('speed_chart'));
-        chart.draw(data, options);
-      }
+      var chart = new google.visualization.Gauge(document.getElementById('speed_chart'));
+      chart.draw(data, options);
+    }
     </script>
 
     <!-- User Loyalty geo chart -->
     <script type='text/javascript'>
-     google.load('visualization', '1', {'packages': ['geochart']});
-     google.setOnLoadCallback(drawRegionsMap);
+    google.load('visualization', '1', {'packages': ['geochart']});
+    google.setOnLoadCallback(drawRegionsMap);
 
-      function drawRegionsMap() {
-        var data = google.visualization.arrayToDataTable([
-          ['Country', 'Popularity'],
-          ['Germany', 200],
-          ['United States', 300],
-          ['Brazil', 400],
-          ['Canada', 500],
-          ['France', 600],
-          ['RU', 700]
-        ]);
-
-        var options = {
-          width:395,
-          height:300,
-        };
-
-        var chart = new google.visualization.GeoChart(document.getElementById('loyalty_chart'));
-        chart.draw(data, options);
+    function drawRegionsMap() {
+      var data = google.visualization.arrayToDataTable([
+        ['Country', 'Popularity'],
+        ['Germany', 200],
+        ['United States', 300],
+        ['Brazil', 400],
+        ['Canada', 500],
+        ['France', 600],
+        ['RU', 700]
+      ]);
+      var options = {
+        width:395,
+        height:300,
+      };
+      var chart = new google.visualization.GeoChart(document.getElementById('loyalty_chart'));
+      chart.draw(data, options);
     };
     </script>
 
-  </head>
-
-  <body>
     <div class="performancestats" style="height:2500px; background-color:#ffffff;">
     <div class="container">
       <div class="row">
@@ -360,8 +348,9 @@
           <div class="linebrake"></div>
         </div>
       </div>
-      
     </div>
   </div>
+
   </body>
+  
 </html>
