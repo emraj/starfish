@@ -4,7 +4,7 @@
  * Plugin Name: Starfish
  * Plugin URI: reef.umiapps.com
  * Description: A performance index plugin for websites on the Umi Reef.
- * Version: 0.2.0
+ * Version: 0.3.0
  * Author: S. M. Sirajo
  */
 
