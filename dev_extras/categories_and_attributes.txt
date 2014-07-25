@@ -1,0 +1,29 @@
+CATEGORIES & ATTRIBUTES
+=======================
+[D] - Dimension
+[M] - Metric
+
+1. ADVERTISING
+   - Placed Ads ->[D]adGroup, [M]impressions 
+   - Clickthrough Rate -> [D]adTargetingType [M]CTR
+
+2. (sITE USER) ACQUISITION
+   - Social Networking -> [D]source [M]sessions
+   - Blogging (get published posts count, use comments) -> No dimsmets requirement.
+   - Newsletter (check Reef)
+   - Events (check Reef)
+
+3. (SITE) USABILITY
+   - site speed -> [D]pagePath [M]pageLoadTime
+   - Readability
+   - Colour Contrast
+
+4. (sITE USER) ENGAGEMENT (goal: are the users engaged?)
+   - New Users -> [D]userType [M]newUsers
+   - Existing Users -> [D] userType [M]users
+   - User Loyalty (frequency & recency)-> [D]daysSinceLastSession [M]users
+   - Depth of visit (% of site visited)
+
+5. E-COMMERCE
+   - Sales -> [D]transactionId [M]transaction
+   - Rooms Booked -> [D]productName [M]itemQuantity
